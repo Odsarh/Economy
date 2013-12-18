@@ -42,10 +42,10 @@ public class Main extends JavaPlugin {
 						
 					}
 				}//End Register Command
-				else if (commandLabel.getName().equalsIgnoreCase("balance")){
+				else  if (commandLabel.getName().equalsIgnoreCase("balance")){
 					if(args.length == 0){
 						if(sender instanceof Player){
-							sender.sendMessage(ChatColor.GRAY + "");
+							sender.sendMessage(ChatColor.GRAY + "Balance: " + ChatColor.GREEN + getConfig().getString("Userdata." + sender.getName() + ".Money") + ChatColor.GRAY + " dollars");
 						}
 					}
 					
