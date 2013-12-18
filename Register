@@ -1,0 +1,29 @@
+package me.begreen98.OdsEco;
+
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+public class Register implements CommandExecutor {
+
+	@Override
+	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
+		if(commandLabel.equalsIgnoreCase("register")){
+			if(args.length == 0){
+				if(sender instanceof Player){
+					sender.sendMessage(ChatColor.GRAY + "Registering...this can take longer depending on how the server is running.");
+					Main.plugin.getConfig().set("Userdata." + sender.getName() + ".Money", Main.plugin.getConfig().getString("Config.Startingmoney"));
+					sender.sendMessage(ChatColor.GRAY + "You have " + ChatColor.GREEN + "successfully" + ChatColor.GRAY + " registered for an account!");
+					sender.sendMessage(ChatColor.GRAY + "You have " + ChatColor.GREEN + Main.plugin.getConfig().getString("Userdata." + sender.getName() + ".Money") + ChatColor.GRAY + " dollars");
+				}}
+			if(args.length == 1){
+				
+			}
+		}
+		return false;
+	}
+
+	
+}
