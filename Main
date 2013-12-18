@@ -13,13 +13,16 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 	public final Logger logger = Logger.getLogger("Minecraft");
-		public static Main plugin;
+		public static JavaPlugin plugin;
+		
 		
 		@Override
-		public void onDisable(){}
+		public void onDisable(){saveConfig();}
 		@Override
 		public void onEnable(){
 				// Calling the Config//UserData
+				plugin = this;
+                getCommand("Register").setExecutor(new Register());
 				try {
 		                 saveConfig();
 		                 setupConfig(getConfig());
@@ -29,40 +32,13 @@ public class Main extends JavaPlugin {
 		        	}
 		}
 		
-		public boolean onCommand(CommandSender sender, Command commandLabel, String commandlabel, String[] args){
-				if(commandLabel.getName().equalsIgnoreCase("register")){
-					if(args.length == 0){
-						if(sender instanceof Player){
-							sender.sendMessage(ChatColor.GRAY + "Registering...this can take longer depending on how the server is running.");
-							getConfig().set("Userdata." + sender.getName() + ".Money", getConfig().getString("Config.Startingmoney"));
-							sender.sendMessage(ChatColor.GRAY + "You have " + ChatColor.GREEN + "successfully" + ChatColor.GRAY + " registered for an account!");
-							sender.sendMessage(ChatColor.GRAY + "You have " + getConfig().getString("Userdata." + sender.getName() + ".Money" + "dollars"));
-						}}
-					if(args.length == 1){
-						
-					}
-				}//End Register Command
-				else  if (commandLabel.getName().equalsIgnoreCase("balance")){
-					if(args.length == 0){
-						if(sender instanceof Player){
-							sender.sendMessage(ChatColor.GRAY + "Balance: " + ChatColor.GREEN + getConfig().getString("Userdata." + sender.getName() + ".Money") + ChatColor.GRAY + " dollars");
-						}
-					}
-					
-					if(args.length == 1){
-						
-					}
-				}
-				// End Balance Command
-			return false;
-		}
-		
-		
 		// Setting up the Config and Userdata
-		private void setupConfig(FileConfiguration config) throws IOException {
+		public void setupConfig(FileConfiguration config) throws IOException {
             if (!new File(getDataFolder(), "RESETCONFIG.FILE").exists()) {
 
                     config.set("Config.Startingmoney","30");
+                    config.set("Config.PreBal", "$");
+                    config.set("Config.AfterBal", " dollars");
                     config.set("Userdata.Odsarh.Money","999999999");
                     new File(getDataFolder(), "RESETCONFIG.FILE").createNewFile();
             }
