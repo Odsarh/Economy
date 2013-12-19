@@ -8,21 +8,17 @@ import org.bukkit.entity.Player;
 
 public class Balance implements CommandExecutor {
 
-	@Override
-	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-		if (commandLabel.equalsIgnoreCase("balance")){
-			if(args.length == 0){
-				if(sender instanceof Player){
-					sender.sendMessage(ChatColor.GRAY + "Balance: " + ChatColor.GREEN + Main.plugin.getConfig().getString("Userdata." + sender.getName() + ".Money") + ChatColor.GRAY + " dollars");
-				}
-			}
-			
-			if(args.length == 1){
-				
-			}
-		}
-		return false;
-	}
+        @Override
+        public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
+                if (commandLabel.equalsIgnoreCase("balance")){
+                        if(args.length == 0){
+                                if(sender instanceof Player){
+                                        sender.sendMessage(ChatColor.GRAY + "Balance: " + ChatColor.GREEN + Main.plugin.getConfig().getString("Userdata." + sender.getName() + ".Money") + ChatColor.GRAY + " dollars");
+                                }
+                        }
+                }
+                return false;
+        }
 
-	
+        
 }
