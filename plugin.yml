@@ -1,0 +1,18 @@
+name: Economy
+main: me.begreen98.OdsEco.Main
+version: 1.0
+description: >
+            Economy Plugins
+commands:
+   register:
+      description: Registers for a Bank Account
+      permission: Eco.reg
+      permission-message: You don't have permission to register for a Bank Account!
+   balance:
+      description: Checks your Balance
+      permission: Eco.bal
+      permission-message: You don't have permission to check your balance! #BlameTheOwners
+   setmoney:
+      description: Sets your money
+      permission: Eco.setmon
+      permission-message: You don't have permission to set your money!
