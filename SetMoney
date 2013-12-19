@@ -1,0 +1,40 @@
+package me.begreen98.OdsEco;
+
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+public class SetMoney implements CommandExecutor {
+
+	@Override
+	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
+		if (commandLabel.equalsIgnoreCase("setmoney")){
+			
+			if(args.length == 0){
+				sender.sendMessage(ChatColor.DARK_RED + "Use as /setmoney Name Amount");
+			}
+			
+			if(args.length == 1){
+				if(sender instanceof Player){
+					Main.plugin.getConfig().set("Userdata." + sender.getName() + ".Money", args[0]);
+                    sender.sendMessage(ChatColor.GRAY + "Your new balance is " + ChatColor.GREEN + Main.plugin.getConfig().getString("Userdata." + sender.getName() + ".Money") + ChatColor.GRAY + " dollars.");
+
+				}else{
+					sender.sendMessage(ChatColor.DARK_RED + "Use as /setmoney Name Amount");
+				}
+			}
+			
+			if(args.length == 2){
+				Player targetPlayer = sender.getServer().getPlayer(args[0]);
+				Main.plugin.getConfig().set("Userdata." + targetPlayer.getName() + ".Money", args[1]);
+                sender.sendMessage(ChatColor.GRAY + "Their new balance is " + ChatColor.GREEN + Main.plugin.getConfig().getString("Userdata." + targetPlayer.getName() + ".Money") + ChatColor.GRAY + " dollars.");
+                targetPlayer.sendMessage(ChatColor.GRAY + "Your balance has been set to " + ChatColor.GREEN + Main.plugin.getConfig().getString("Userdata." + targetPlayer.getName() + ".Money") + ChatColor.GRAY + " by " + ChatColor.GREEN + sender.getName());
+			}
+		}
+		return false;
+	}
+
+	
+}
